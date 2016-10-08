@@ -16,8 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+from workouts import views
+
+router = DefaultRouter()
+router.register(r'exercises', views.ExerciseViewSet)
+router.register(r'exercise_intances', views.ExerciseInstancesViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
