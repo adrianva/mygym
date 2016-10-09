@@ -22,6 +22,8 @@ from workouts import views
 router = DefaultRouter()
 router.register(r'exercises', views.ExerciseViewSet)
 router.register(r'exercise_intances', views.ExerciseInstancesViewSet)
+router.register(r'plans', views.PlanViewSet)
+router.register(r'days', views.PlanDayViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

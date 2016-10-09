@@ -12,8 +12,8 @@ class Exercise(models.Model):
 
 
 class ExerciseInstances(models.Model):
-    exercise_id = models.IntegerField()
-    day_id = models.IntegerField()
+    exercise = models.ForeignKey('Exercise')
+    day = models.ForeignKey('PlanDays')
     exercise_duration = models.IntegerField()
     order = models.IntegerField()
 
@@ -33,7 +33,7 @@ class Plan(models.Model):
 
 
 class PlanDays(models.Model):
-    plan_id = models.IntegerField()
+    plan = models.ForeignKey('Plan', related_name='days')
     day_name = models.CharField(max_length=100)
     order = models.IntegerField()
 
