@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}My Gym App{% endblock %}
+
+{% block container %}
+    <div class="container">
+     <form id="form-chart" class="form-horizontal starter-template" action="" method="get">
+    {% csrf_token %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">My Workout Plans</div>
+            <div class="list-group">
+                {% for plan in plans %}
+                    <a href="{% url 'workouts:plan_detail' plan.id %}" class="list-group-item">{{ plan.plan_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="#" class="btn btn-success" role="button">Add Plan</a>
+    </form>
+    </div><!-- /.container -->
+{% endblock %}
+
+{% block customjs %}
+    {% load static %}
+    <!-- Custom scripts -->
+{% endblock %}

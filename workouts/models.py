@@ -13,7 +13,7 @@ class Exercise(models.Model):
 
 class ExerciseInstances(models.Model):
     exercise = models.ForeignKey('Exercise')
-    day = models.ForeignKey('PlanDays')
+    day = models.ForeignKey('PlanDays', related_name='exercises')
     exercise_duration = models.IntegerField()
     order = models.IntegerField()
 

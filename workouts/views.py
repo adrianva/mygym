@@ -1,6 +1,11 @@
+from django.shortcuts import render
+from django.conf import settings
 from rest_framework import viewsets, permissions
-from workouts.models import Exercise, ExerciseInstances, Plan, PlanDays
-from workouts.serializers import ExerciseSerializer, ExerciseInstancesSerializer, PlanSerializer, PlanDaysSerializer
+
+import requests
+
+from .models import Exercise, ExerciseInstances, Plan, PlanDays
+from .serializers import ExerciseSerializer, ExerciseInstancesSerializer, PlanSerializer, PlanDaysSerializer
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
@@ -37,4 +42,18 @@ class PlanDayViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PlanDays.objects.all()
     serializer_class = PlanDaysSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-    lookup_field = 'id'
+
+
+def show_plans(request):
+    json = {}
+    response = requests.get(settings.API_URL + '/plans/')
+    json['plans'] = response.json()
+    return render(request, 'plans.html', json)
+
+
+def plan_detail(request):
+    json = {}
+    plan_id = request.GET.get('plan', None)
+    response = requests.get(settings.API_URL + '/plans/' + plan_id)
+    json['plan'] = response.json()
+    return render(request, 'plan_detail.html', json)

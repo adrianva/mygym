@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from workouts.models import *
+from .models import *
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -8,16 +8,30 @@ class ExerciseSerializer(serializers.ModelSerializer):
         fields = ('id', 'exercise_name')
 
 
+class ExerciseInstancesSerializer(serializers.ModelSerializer):
+    exercise = ExerciseSerializer()
+    day = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='day_name'
+    )
+
+    class Meta:
+        model = ExerciseInstances
+        fields = ('id', 'exercise', 'day', 'exercise_duration', 'order')
+
+
 class PlanDaysSerializer(serializers.ModelSerializer):
     plan = serializers.SlugRelatedField(
         many=False,
         read_only=True,
         slug_field='plan_name'
     )
+    exercises = ExerciseInstancesSerializer(many=True, read_only=True)
 
     class Meta:
         model = PlanDays
-        fields = ('id', 'plan', 'day_name', 'order')
+        fields = ('id', 'plan', 'exercises', 'day_name', 'order')
 
 
 class PlanSerializer(serializers.ModelSerializer):
@@ -26,12 +40,3 @@ class PlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plan
         fields = ('id', 'plan_name', 'plan_description', 'plan_difficulty', 'days')
-
-
-class ExerciseInstancesSerializer(serializers.ModelSerializer):
-    exercise = ExerciseSerializer()
-    day = PlanDaysSerializer()
-
-    class Meta:
-        model = ExerciseInstances
-        fields = ('id', 'exercise', 'day', 'exercise_duration', 'order')

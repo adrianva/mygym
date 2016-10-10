@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}My Gym App{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ plan.plan_name }}</div>
+            <div class="list-group">
+                {% for day in plan.days %}
+                    <a href="#" class="list-group-item">{{ day.day_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="#" class="btn btn-success" role="button">Save</a>
+    </div><!-- /.container -->
+{% endblock %}
+
+{% block customjs %}
+    {% load static %}
+    <!-- Custom scripts -->
+{% endblock %}
+
