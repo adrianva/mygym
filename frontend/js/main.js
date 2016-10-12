@@ -49,11 +49,11 @@ $('#form-plan').on('submit', function(event){
 
 // AJAX for post a plan
 function createPlan() {
-    console.log("create_plan is working!"); // sanity check
     var data = $('#form-plan').serializeArray().reduce(function(obj, item) {
         obj[item.name] = item.value;
         return obj;
     }, {});
+    var exercise_name = $("#select-exercise option:selected" ).text();
     console.log(data);
     $.ajax({
         url: CONFIG.get('API_PLANS'), // the endpoint
@@ -68,12 +68,13 @@ function createPlan() {
                 day_name: data["day-name"],
                 order: 1,
                 exercises: [{
-                    day: {},
-                    exercise: data["select-exercise"],
+                    exercise: {
+                        id: data["select-exercise"],
+                        exercise_name: exercise_name
+                    },
                     exercise_duration: data["exercise-duration"],
                     order: 1
-                }],
-                plan: {}
+                }]
             }]
         }),
 

@@ -48,10 +48,6 @@
                     <div id="plan-name" class="panel-heading"></div>
                     <div id="list-days" class="list-group"></div>
                 </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading"><b>Exercises</b></div>
-                    <div id="list-exercises" class="list-group"></div>
-                </div>
             </div>
         </div><!-- /.container -->
 
@@ -96,18 +92,6 @@
                         });
                         //$("<p>").attr("class", "list-group-item")
                         //        .text(days[index]["day_name"]).appendTo("#list-days");
-                    });
-                });
-            })();
-
-            (function() {
-                var mygymAPI = CONFIG.get('API_EXERCISES');
-                $.getJSON(mygymAPI)
-                .done(function(data) {
-                    $.each( data, function(index) {
-                        //$('#list-plans').html("<a class='list-group-item' href='#'>data[index].plan_name</a>");
-                        $("<p>").attr("class", "list-group-item")
-                                .text(data[index]["exercise_name"]).appendTo( "#list-exercises");
                     });
                 });
             })();
