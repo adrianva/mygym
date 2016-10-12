@@ -72,7 +72,6 @@
                 var mygymAPI = CONFIG.get('API_PLANS') + plan_id;
                 $.getJSON(mygymAPI)
                 .done(function(data) {
-                    console.log(data);
                     var days = data["days"];
                     $("#plan-name").text(data["plan_name"]).css("font-weight", "Bold").appendTo("#plan-name");
                     $.each( days, function(index) {
@@ -88,12 +87,11 @@
                         $("<div>").attr("class", "collapse").attr("id", anchorClass).appendTo("#list-days");
 
                         var exercises = days[index]["exercises"];
-                        console.log(exercises);
                         $.each( exercises, function(index) {
                             console.log(exercises[index]["exercise"]["exercise_name"]);
                             $("<a>").attr("class", "list-group-item")
                                     .attr("href", "javascript:;")
-                                    .text(exercises[index]["exercise"]["exercise_name"])
+                                    .text(exercises[index]["exercise"]["exercise_name"] + " (" + exercises[index]["exercise_duration"] + " s)")
                                     .appendTo("#" + anchorClass);
                         });
                         //$("<p>").attr("class", "list-group-item")
