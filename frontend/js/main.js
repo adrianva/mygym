@@ -1,7 +1,9 @@
 var CONFIG = (function() {
+     var IP = 'http://127.0.0.1:8000';
      var private = {
-         'API_PLANS': 'http://127.0.0.1:8000/api/plans/',
-         'API_EXERCISES': 'http://127.0.0.1:8000/api/exercises/'
+         'IP': 'http://127.0.0.1:8000',
+         'API_PLANS': IP + '/api/plans/',
+         'API_EXERCISES': IP + '/api/exercises/'
      };
 
      return {
