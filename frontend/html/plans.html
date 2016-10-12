@@ -23,15 +23,31 @@
         <![endif]-->
     </head>
 
-    <body class="starter-template">
-        <div class="container">
-            <form id="form-chart" class="form-horizontal" action="" method="get">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">My Workout Plans</div>
-                    <div id="list-plans" class="list-group"></div>
-                </div>
-                <a href="#" class="btn btn-success" role="button">Add Plan</a>
-            </form>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+              <div class="navbar-brand">MyGym</div>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="plans.html">Plans</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container starter-template">
+            <div class="panel panel-primary">
+                <div class="panel-heading">My Workout Plans</div>
+                <div id="list-plans" class="list-group"></div>
+            </div>
+            <a href="new_plan.html" class="btn btn-success" role="button">Add Plan</a>
         </div><!-- /.container -->
 
         <!-- Bootstrap core JavaScript

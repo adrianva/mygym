@@ -23,8 +23,26 @@
         <![endif]-->
     </head>
 
-    <body class="starter-template">
-        <div class="container">
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+              <div class="navbar-brand">MyGym</div>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="plans.html">Plans</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container starter-template">
             <div class="form-group" id="plan-group">
                 <div class="panel panel-primary">
                     <div id="plan-name" class="panel-heading"></div>
@@ -51,9 +69,10 @@
         <script>
             (function() {
                 var plan_id = getParameterByName('plan');
-                var mygymAPI = "http://127.0.0.1:8000/api/plans/" + plan_id;
+                var mygymAPI = CONFIG.get('API_PLANS') + plan_id;
                 $.getJSON(mygymAPI)
                 .done(function(data) {
+                    console.log(data);
                     var days = data["days"];
                     $("#plan-name").text(data["plan_name"]).css("font-weight", "Bold").appendTo("#plan-name");
                     $.each( days, function(index) {
@@ -69,7 +88,9 @@
                         $("<div>").attr("class", "collapse").attr("id", anchorClass).appendTo("#list-days");
 
                         var exercises = days[index]["exercises"];
+                        console.log(exercises);
                         $.each( exercises, function(index) {
+                            console.log(exercises[index]["exercise"]["exercise_name"]);
                             $("<a>").attr("class", "list-group-item")
                                     .attr("href", "javascript:;")
                                     .text(exercises[index]["exercise"]["exercise_name"])
@@ -82,7 +103,7 @@
             })();
 
             (function() {
-                var mygymAPI = "http://127.0.0.1:8000/api/exercises/";
+                var mygymAPI = CONFIG.get('API_EXERCISES');
                 $.getJSON(mygymAPI)
                 .done(function(data) {
                     $.each( data, function(index) {

@@ -19,6 +19,7 @@ class ExerciseInstances(models.Model):
 
     class Meta:
         managed = False
+        ordering = ['order']
         db_table = 'exercise_instances'
 
 
@@ -39,4 +40,5 @@ class PlanDays(models.Model):
 
     class Meta:
         managed = False
+        ordering = ['order']
         db_table = 'plan_days'
